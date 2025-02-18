@@ -1,6 +1,6 @@
 # Module3_Vero-Social_E-Commerce
 
-Asive Si
+Asive Simoki
 Luthando Dake
 Tarryn Masunda
 Azola Ndoda
