@@ -1,4 +1,4 @@
-# Module3_Vero-Social_E-Commerce
+# Module3_Lumiere_Boutique_E-Commerce
 
 Asive Simoki
 Luthando Dake
