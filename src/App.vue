@@ -3,18 +3,19 @@
     <nav class="nav">
       <div class="logo-container">
         <img src="./assets/est 2025/icon_logo-transparent.png" alt="Lumiere Logo" class="logo-img" />
-        <!-- <h1 class="logo">Lumiere Boutique</h1> -->
+        <!-- <h1 class="logqo">Lumiere Boutique</h1> -->
       </div>
       <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
         <li class="dropdown">
-          <a href="#products">Products</a>
-          <ul class="dropdown-menu">
+          <RouterLink to="/ProductPage">Products</RouterLink>
+
+          <!-- <ul class="dropdown-menu">
             <li><a href="#silk-scarves">Silk Scarves</a></li>
             <li><a href="#cotton-blend">Cotton Blend Scarves</a></li>
             <li><a href="#bandanas">Bandanas</a></li>
-          </ul>
+          </ul> -->
         </li>
         <li><a href="#new-arrivals">New Arrivals</a></li>
         <li><a href="#blog">Blog</a></li>
@@ -30,44 +31,59 @@
   
     
     <!-- Bootstrap Carousel -->
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="https://via.placeholder.com/800x400/ff7f7f/333333?text=Image+1" alt="First slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://via.placeholder.com/800x400/7f7fff/333333?text=Image+2" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://via.placeholder.com/800x400/7fff7f/333333?text=Image+3" alt="Third slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://via.placeholder.com/800x400/7fff7f/333333?text=Image+4" alt="Four slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://via.placeholder.com/800x400/7fff7f/333333?text=Image+5" alt="Five slide">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/Carousel 1.jpg" alt="First slide">
     </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/Carousel 2.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/carousel 3.jpg" alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/carousel 4.jpg" alt="Fourth slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/carousel 5.jpg" alt="Fifth slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./assets/Images/carousel slides/carousel 6.jpg" alt="Sixth slide">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+
+<!-- <div class="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item" v-for="slide in slides">
+      <img :src="slide"/>
+    </div>
+  </div>
+</div> -->
+
   </header>
 
-  <div class="card" style="width: 18rem;">
-  <img src="your-image.jpg" class="card-img-top" alt="Elegant Scarf">
-  <div class="card-body">
-    <h5 class="card-title">Luxury Silk Scarves</h5>
-    <p class="card-text">Explore our finest collection of silk and cotton blend scarves, crafted for elegance.</p>
-    
     <!-- Features Section Inside the Card -->
     <section class="features">
       <div class="container d-flex justify-content-center gap-3 flex-wrap">
+
+        <div class="card" style="width: 18rem;">
+    <img src="your-image.jpg" class="card-img-top" alt="Elegant Scarf">
+    <div class="card-body">
+      <h5 class="card-title">Luxury Silk Scarves</h5>
+      <p class="card-text">Explore our finest collection of silk and cotton blend scarves, crafted for elegance.</p>
+      <a href="#premium-quality" class="btn btn-primary">Learn More</a>
+    </div>
+  </div>
   <!-- Card 1 -->
   <div class="card" style="width: 18rem;">
     <img src="premium-quality.jpg" class="card-img-top" alt="Premium Quality">
@@ -98,16 +114,14 @@
     </div>
   </div>
 </div>
-    </section>
-  </div>
-</div>
-  </div>
+  </section>
+
   <footer class="footer">
       <div class="footer-content">
         <div class="footer-section">
           <h3>Contact Us</h3>
           <p><b>Email:</b> contact@lumiereboutique.org.za</p>
-          <p><b>Phone:</b> +27 123 456</p>
+          <p><b>Phone:</b> +27 123 4567</p>
           <p><b>Address:</b> 123 Fashion St, Cape Town, South Africa</p>
         </div>
         <div class="footer-section">
@@ -126,28 +140,33 @@
             <a href="https://facebook.com" target="_blank" class="social-icon">Facebook</a>
             <a href="https://instagram.com" target="_blank" class="social-icon">Instagram</a>
             <a href="https://twitter.com" target="_blank" class="social-icon">Twitter</a>
+            <a href="https://www.tiktok.com" target="_blank" class="social-icon">TikTok</a>
+          </div>
           </div>
         </div>
-      </div>
-      <div class="footer-bottom">
+      <div class="bg-dark text-white text-center py-3 fixed-bottom">
         <p>&copy; 2025 Lumiere Boutique. All Rights Reserved.</p>
       </div>
     </footer>
+    </div>
 </template>
 
 <script>
 export default {
   name: "HomePage",
-  data() {
-    return {
-      images: [
-        'https://via.placeholder.com/800x400/ff7f7f/333333?text=Image+1',
-        'https://via.placeholder.com/800x400/7f7fff/333333?text=Image+2',
-        'https://via.placeholder.com/800x400/7fff7f/333333?text=Image+3'
-      ]
+  data: () => ({
+    sildes: [
+      "https://raw.githubusercontent.com/luthandodake10111/Lumiere_Boutique_e-Commerce_Module-3/[…]%20and%20icons/Images/carousel%20slides/Carousel%201.jpg",
+      "https://github.com/luthandodake10111/Lumiere_Boutique_e-Commerce_Module-3/blob/mai[…]0and%20icons/Images/carousel%20slides/Carousel%202.jpg?raw=true",
+      "https://github.com/luthandodake10111/Lumiere_Boutique_e-Commerce_Module-3/blob/mai[…]Images/carousel%20slides/Red%20and%20White%20Scarf.jpg?raw=true",
+      "https://github.com/luthandodake10111/Lumiere_Boutique_e-Commerce_Module-3/blob/mai[…]ns/Images/carousel%20slides/Scarf%20with%20a%20bag.jpg?raw=true",
+      "https://github.com/luthandodake10111/Lumiere_Boutique_e-Commerce_Module-3/blob/mai[…]ns/Images/carousel%20slides/Scarf%20with%20a%20bag.jpg?raw=true",
+
+
+    ]
+  })
     };
-  }
-};
+ 
 </script>
 
 <style scoped>
@@ -160,11 +179,12 @@ export default {
 
 }
 
-.nav {
+/* Navbar Base Styling */
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0px; */
+  padding: 0px;
   background-color: #333333;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   color: #D4AF37;
@@ -184,11 +204,6 @@ export default {
   transition: transform 0.5s ease;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .nav ul {
   list-style: none;
   display: flex;
@@ -198,17 +213,25 @@ export default {
 
 .nav a {
   text-decoration: none;
-  color: white;
+  color: #fff;
   font-weight: 500;
   padding: 25px 15px;
+  transition: color 0.3s ease;
 }
 
+/* Navbar Hover & Active Page Effect */
+.nav a:hover,
+.nav a.active {
+  color: gold !important;
+}
+
+/* Dropdown Styling */
 .dropdown {
   position: relative;
 }
 
+/* Hidden Dropdown Menu */
 .dropdown-menu {
-  display: none;
   position: absolute;
   background: #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -217,11 +240,40 @@ export default {
   top: 100%;
   left: 0;
   min-width: 150px;
+  
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
+
+/* Dropdown Menu Links */
+.dropdown-menu li {
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+
+.dropdown-menu a {
+  color: #333;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Hover Effect for Dropdown Links */
+.dropdown-menu a:hover {
+  background: gold;
+  color: white;
+}
+
 
 .hero {
   text-align: center;
@@ -245,7 +297,7 @@ export default {
 }
 
 .card {
-  background: #fff;
+  background:  gold !important;;
   padding: 1.5rem;
   margin: 2rem auto;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -301,6 +353,7 @@ export default {
   font-size: 18px; 
   font-weight: 600;
   margin-bottom: 12px; 
+  color: #D4AF37;;
 }
 
 .footer p,
