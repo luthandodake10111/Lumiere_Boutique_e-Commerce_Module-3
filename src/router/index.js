@@ -3,6 +3,9 @@ import ProductPage from '../components/ProductPage.vue';
 import Blog from "../views/Blog.vue";
 import BlogPost from "../views/BlogPost.vue";
 import HomePage from '@/components/HomePage.vue';
+import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
+
 
 
 const routes = [
@@ -24,6 +27,16 @@ const routes = [
     name: 'ProductPage',
     component: ProductPage,
   },
+  {
+    path: '/Login',
+    name: Login,
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/Register',
+    name: Register,
+    component: () => import('../views/Register.vue')
+  },
 
 
 { path: "/blog", component: Blog },
@@ -34,5 +47,15 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem('token');
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/Login');
+  } else {
+    next();
+  }
+});
+
 
 export default router
