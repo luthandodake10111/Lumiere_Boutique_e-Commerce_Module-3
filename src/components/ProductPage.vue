@@ -1,48 +1,107 @@
 <template>
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-4" v-for="image in images" :key="image.image_id">
-        <div class="card" style="width: 18rem;">
-          <img :src="image.image_url" class="card-img-top" alt="Product Image">
-          <div class="card-body">
-            <h5 class="card-title">Product Title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Product Subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
+  <div class="gallery-container">
+    <h2 class="gallery-title">Luxury Silk Scarves Collection</h2>
+    <div class="product-grid">
+      <div v-for="product in products" :key="product.id" class="product-card">
+        <div class="image-container">
+          <img :src="product.image" :alt="product.name" class="product-image">
         </div>
+        <h3>{{ product.name }}</h3>
+        <p class="price">${{ product.price }}</p>
+        <button class="btn">Add to Cart</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      images: [] // will hold the images data
+      products: []
     };
   },
-  mounted() {
-    this.fetchProductImages(1); // Fetch images for a product (productId = 1)
-  },
-  methods: {
-    async fetchProductImages(productId) {
-      try {
-        const response = await fetch(`http://localhost:3000/api/product-images/${productId}`);
-        const data = await response.json();
-        this.images = data; // Populate images with data from API
-      } catch (error) {
-        console.error('Error fetching product images:', error);
-      }
+  async created() {
+    try {
+      const response = await axios.get("http://localhost:5000/api/products");
+      this.products = response.data;
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
   }
 };
 </script>
 
 <style scoped>
-.card {
+/* Gallery Layout */
+.gallery-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.gallery-title {
+  font-size: 2rem;
   margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Product Card */
+.product-card {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(44, 62, 80, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+/* Image Rotation on Hover */
+.image-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease-in-out;
+}
+
+.product-card:hover .product-image {
+  transform: rotateY(180deg);
+}
+
+/* Price & Button */
+.price {
+  font-size: 1.2rem;
+  color: #D4AF37;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #D4AF37;
 }
 </style>

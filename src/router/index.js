@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HomePage from '@/components/HomePage.vue';
-import AboutPage from '../views/AboutView.vue';
+import AboutPage from '@/components/AboutPage.vue';
 import ProductPage from '../components/ProductPage.vue';
 // import AllProducts from '../components/products/AllProducts.vue';
 // import SilkScarvesPage from '../views/SilkScarvesPage.vue';
@@ -17,20 +17,15 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/about',
+    path: '/AboutPage',
     name: 'about',
     component: AboutPage
   },
   {
     path: '/ProductPage',
-    name: 'ProductPage',
+    name: 'products',
     component: ProductPage,
   },
-//   {
-//     path: '/all-products',
-//     name: 'all-products',
-//     component: AllProducts, 
-//   },
 //   {
 //     path: '/silk-scarves',
 //     name: 'silk-scarves',
