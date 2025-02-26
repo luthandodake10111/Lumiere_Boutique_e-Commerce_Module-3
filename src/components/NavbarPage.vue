@@ -5,7 +5,7 @@
       </div>
   
       <ul class="nav-links">
-        <li><router-link to="/HomePage">Home</router-link></li>
+        <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/AboutPage">About</router-link></li>
   
         <li class="dropdown">

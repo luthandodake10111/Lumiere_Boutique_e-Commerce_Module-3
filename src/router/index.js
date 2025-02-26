@@ -12,7 +12,7 @@ import BlogPost from "../views/BlogPost.vue";
 
 const routes = [
   {
-    path: '/HomePage',
+    path: '/',
     name: 'home',
     component: HomePage
   },
