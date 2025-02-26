@@ -36,9 +36,7 @@ export default {
   data() {
     return {
       slides: [
-      "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/c1.webp",
-
-"https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/c2.webp",
+     "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/c1.webp",
 
 "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/c3.webp",
 
@@ -52,7 +50,9 @@ export default {
 
 "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/carousel%206%20landscape.jpg",
 
-"https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/carousel%204%20landscape.jpg"
+"https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/carousel%204%20landscape.jpg",
+
+"https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/first%20one.jpg"
       ],
       currentIndex: 0,
       transitioning: true,
@@ -88,7 +88,7 @@ export default {
       this.currentIndex = index;
     },
     startAutoSlide() {
-      this.interval = setInterval(this.nextSlide, 3000);
+      this.interval = setInterval(this.nextSlide, 5000);
     },
     stopAutoSlide() {
       clearInterval(this.interval);
@@ -132,12 +132,11 @@ export default {
 }
 
 .carousel-slide img {
-  width: 100vw;
-  object-fit: contain;
-  object-fit: cover ;
-  height: 90vh;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
   max-height: 800px;
-  border-radius: 0;
+  border-radius: 10px;
 }
 
 .hero-overlay {
@@ -157,6 +156,9 @@ export default {
 .hero-overlay h2 {
   font-size: 2rem;
   margin-bottom: 10px;
+}
+.hero-overlay .wear-lumiere {
+  font-style: italic;
 }
 
 .hero-overlay p {

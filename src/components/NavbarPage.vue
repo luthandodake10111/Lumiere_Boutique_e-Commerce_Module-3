@@ -1,7 +1,7 @@
 <template>
     <nav class="nav">
       <div class="logo-container">
-        <img src="../assets/est 2025/icon_logo-transparent.png" alt="Lumiere Logo" class="logo-img" />
+        <img src="https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/est%202025/icon_logo-transparent.png" alt="Lumiere Logo" class="logo-img" />
       </div>
   
       <ul class="nav-links">
@@ -34,8 +34,10 @@
   </script>
   
   <style scoped>
+
+  
  * {
-  font-family: 'Lato', 'Montserrat', 'Playfair Display', 'Merriweather';
+  font-family: 'Hello Paris Light', 'maragsa', 'Role Model', '';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -48,13 +50,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333333;
+  background-color: whitesmoke;
   color: whitesmoke;
   padding: 0 30px;
   height: 100px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1000;
+  box-shadow: 0px 4px 6px #333333;
+  font-family: "maragsa" ;
+
 }
 
 /* Logo Styling */
@@ -87,7 +92,7 @@
 /* Link Styling */
 .nav a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #333333;
   font-weight: 500;
   padding: 15px 20px;
   transition: color 0.3s ease;
