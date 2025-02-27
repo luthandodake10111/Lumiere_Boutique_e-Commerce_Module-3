@@ -3,8 +3,9 @@
     <div class="hero-overlay">
       <h2>Embrace Elegance, Wear Lumiere.</h2>
       <p>Elevate your style with our premium collection.</p>
-      <button class="btn">Shop Now</button>
-    </div>
+      <router-link to="/ProductPage">
+        <button class="btn">Shop Now</button>
+      </router-link>    </div>
 
     <div
       class="carousel"
@@ -16,8 +17,8 @@
       </div>
     </div>
 
-    <button @click="prevSlide" class="carousel-prev">&#10094;</button>
-    <button @click="nextSlide" class="carousel-next">&#10095;</button>
+    <!-- <button @click="prevSlide" class="carousel-prev">&#10094;</button>
+    <button @click="nextSlide" class="carousel-next">&#10095;</button> -->
 
     <div class="carousel-dots">
       <span
@@ -86,6 +87,10 @@ export default {
     goToSlide(index) {
       this.transitioning = true;
       this.currentIndex = index;
+    },
+
+    goToProducts() {
+      this.$router.push('/ProductsPage'); 
     },
     startAutoSlide() {
       this.interval = setInterval(this.nextSlide, 5000);

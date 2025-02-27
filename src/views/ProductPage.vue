@@ -1,4 +1,5 @@
 <template>
+   <NavbarPage />
   <div class="gallery-container">
     <h2 class="gallery-title">Luxury Silk Scarves Collection</h2>
     <div class="product-grid">
@@ -12,12 +13,19 @@
       </div>
     </div>
   </div>
+<!-- <FooterPage /> -->
 </template>
 
 <script>
-// import axios from "axios";
+import NavbarPage from "@/components/NavbarPage.vue";
+import FooterPage from "@/components/FooterPage.vue";
 
 export default {
+  components: {
+    NavbarPage,
+    FooterPage
+  },
+
   data() {
     return {
       products: []

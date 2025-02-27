@@ -41,26 +41,22 @@
       </div>
     </div>
   </div>
+  <FooterPage />
 </template>
 
 <script>
 import NavbarPage from "@/components/NavbarPage.vue";
-import CarouselPage from "@/components/CarouselPage.vue";
-
+import FooterPage from "@/components/FooterPage.vue";
 export default {
   components: {
     NavbarPage,
-    CarouselPage
+    FooterPage
   }
 }
 </script>
 
 <style scoped>
-* {
-  font-family: 'Lato', 'Montserrat', 'Playfair Display', 'Merriweather';
-  text-align: center;
-  color: #333333;
-}
+
 
 .grid-container {
   display: grid;

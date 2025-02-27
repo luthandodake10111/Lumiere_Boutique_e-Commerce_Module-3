@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HomePage from '@/components/HomePage.vue';
-import AboutPage from '@/components/AboutPage.vue';
-import ProductPage from '../components/ProductPage.vue';
+import Home from '@/views/Home.vue';
+import AboutPage from '@/views/AboutPage.vue';
+import ProductPage from '../views/ProductPage.vue';
 // import AllProducts from '../components/products/AllProducts.vue';
 // import SilkScarvesPage from '../views/SilkScarvesPage.vue';
 // import CottonBlendPage from '../views/CottonBlendPage.vue';
@@ -13,17 +13,17 @@ import BlogPost from "../views/BlogPost.vue";
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomePage
+    name: 'Home',
+    component: Home
   },
   {
     path: '/AboutPage',
-    name: 'about',
+    name: 'About',
     component: AboutPage
   },
   {
     path: '/ProductPage',
-    name: 'products',
+    name: 'Products',
     component: ProductPage,
   },
 //   {
