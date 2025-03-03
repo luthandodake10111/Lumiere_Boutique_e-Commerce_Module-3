@@ -1,6 +1,8 @@
 <template>
   <div>
     <NavbarPage />
+
+    <br><br><br><br><br><br>
     <h1>About Lumiere Boutique</h1>
     <div class="grid-container">
       <div class="card">
@@ -71,7 +73,7 @@ export default {
   background: whitesmoke !important;
   padding: 1.5rem;
   margin: 2rem auto;
-  box-shadow: 0px 4px 6px #333333;
+  box-shadow: 0px 4px 6px ;
   border-radius: 8px;
   font-size: medium;
 }

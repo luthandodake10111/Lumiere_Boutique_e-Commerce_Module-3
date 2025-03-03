@@ -1,39 +1,37 @@
 <template>
-   <NavbarPage />
-  <div class="gallery-container">
-    <h2 class="gallery-title">Luxury Silk Scarves Collection</h2>
-    <div class="product-grid">
-      <div v-for="product in products" :key="product.id" class="product-card">
-        <div class="image-container">
-          <img :src="product.image" :alt="product.name" class="product-image">
-        </div>
-        <h3>{{ product.name }}</h3>
-        <p class="price">${{ product.price }}</p>
-        <button class="btn">Add to Cart</button>
-      </div>
+  <NavbarPage />
+  <br><br><br>
+  <br><br><br>
+
+  <h1>Explore Our Elegant Collection</h1>
+  <div class="product-page">
+    <div class="product-list">
+      <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
   </div>
-<!-- <FooterPage /> -->
+  <FooterPage />
 </template>
 
 <script>
+import axios from "axios";
 import NavbarPage from "@/components/NavbarPage.vue";
+import ProductCard from "@/components/ProductCard.vue";
 import FooterPage from "@/components/FooterPage.vue";
 
 export default {
   components: {
     NavbarPage,
+    ProductCard,
     FooterPage
   },
-
   data() {
     return {
       products: []
     };
   },
-  async created() {
+  async mounted() {
     try {
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get("http://localhost:3000/products");
       this.products = response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -43,73 +41,39 @@ export default {
 </script>
 
 <style scoped>
-/* Gallery Layout */
-.gallery-container {
-  max-width: 1200px;
-  margin: auto;
+.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
+}
+
+h1 {
   text-align: center;
-}
-
-.gallery-title {
   font-size: 2rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
+  color: #003366;
+  margin-bottom: 1.5rem;
 }
 
-/* Product Grid */
-.product-grid {
+.product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Product Card */
-.product-card {
-  background: #f9f9f9;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(44, 62, 80, 0.3);
-  transition: transform 0.3s ease-in-out;
-}
-
-.product-card:hover {
-  transform: scale(1.05);
-}
-
-/* Image Rotation on Hover */
-.image-container {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 20px;
+  max-width: 1200px;
   width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
+  margin: auto;
+  justify-content: center;
 }
 
-.product-image {
-  width: 100%;
-  height: auto;
-  transition: transform 0.5s ease-in-out;
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(1, 2fr);
+  }
 }
 
-.product-card:hover .product-image {
-  transform: rotateY(180deg);
-}
-
-/* Price & Button */
-.price {
-  font-size: 1.2rem;
-  color: #D4AF37;
-}
-
-.btn {
-  padding: 0.5rem 1rem;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #D4AF37;
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

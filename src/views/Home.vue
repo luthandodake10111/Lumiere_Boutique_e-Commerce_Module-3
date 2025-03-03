@@ -1,5 +1,4 @@
 <template>
-  <div>
     <NavbarPage />
     <CarouselPage />
     <router-view></router-view>
@@ -22,50 +21,21 @@
   </div>
 </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Contact Us</h3>
-          <p class="contact-info">Email: contact@lumiereboutique.org.za</p>
-          <p class="contact-info">Phone: +27 123 4567</p>
-          <p class="contact-info">Address: 123 Fashion St, Cape Town, South Africa</p>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-         
-            <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/AboutPage">About</router-link></li>
-            <li><router-link to="/ProjectsPage">Products</router-link></li>
-            <li><router-link to="/contact">Contact</router-link></li>
-            <li><router-link to="/login">Login</router-link></li>
-         
-        </div>
-        <div class="footer-section">
-          <h3>Follow Us</h3>
-          <div class="social-media">
-            <a :href="socialLinks.instagram" target="_blank" class="social-icon">Instagram</a>
-            <a :href="socialLinks.twitter" target="_blank" class="social-icon">Twitter</a>
-            <a :href="socialLinks.tiktok" target="_blank" class="social-icon">TikTok</a>
-          </div>
-        </div>
-      </div>
-      <div class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 Lumiere Boutique. All Rights Reserved.</p>
-      </div>
-    </footer>
-  </div>
+  <FooterPage />
 </template>
 
 <script>
 
 import NavbarPage from "@/components/NavbarPage.vue";
 import CarouselPage from "@/components/CarouselPage.vue";
+import FooterPage from "@/components/FooterPage.vue";
+
 
 export default {
   components: {
     NavbarPage,
-    CarouselPage
+    CarouselPage,
+    FooterPage
   },
   data() {
   return {
