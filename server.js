@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import usersRouter from './routes/usersRouter.js';
 import crypto from 'crypto'
-// import productRouter from './routes/productRouter.js';
+import productRouter from './routes/productRoutes.js';
 
 dotenv.config();
 
@@ -15,6 +15,7 @@ app.use(cors());
 
 // Routes
 app.use('/users', usersRouter);
+app.use('/products', productRouter)
 
 
 // Server
