@@ -1,43 +1,82 @@
 <template>
-    <div>
-      <h1>{{ product.product_name }}</h1>
-      <img :src="product.imageUrl" alt="Product Image" />
-      <p>{{ product.description }}</p>
-      <p>Price: ₹{{ product.price }}</p>
+  <NavbarPage />
+  <div class="product-detail">
+    <div class="product-images">
+      <img :src="product.image_url" alt="Product Image" class="product-main-image" />
+      <div v-for="image in product.additional_images" :key="image" class="product-image">
+        <img :src="image" alt="Additional Image" />
+      </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'ProductDetail',
-    props: {
-      id: {
-        type: Number,
-        required: true,
-      },
-    },
-    data() {
-      return {
-        product: null,
-      };
-    },
-    created() {
-      // Fetch the product data based on the id prop
-      // For demonstration, we'll use a static array
-      const products = [
-        { id: 220, product_name: 'Cotton Silk Scarf - Blue & Grey', price: 1500, stock_quantity: 100, description: 'A luxurious cotton-silk blend scarf.' },
-        { id: 221, product_name: 'Cotton Silk Scarf - Brown', price: 1400, stock_quantity: 0, description: 'Elegant brown cotton-silk scarf.' },
-        { id: 222, product_name: 'Cotton Silk Scarf - Blue', price: 1450, stock_quantity: 120, description: 'Soft cotton-silk scarf in blue.' },
-        { id: 223, product_name: 'Cotton Silk Scarf - Green', price: 1300, stock_quantity: 80, description: 'Vibrant green cotton-silk scarf.' },
-        { id: 224, product_name: 'Cotton Silk Scarf - Red', price: 1350, stock_quantity: 90, description: 'Elegant red cotton-silk scarf.' },
-        { id: 225, product_name: 'Cotton Silk Scarf - Black', price: 1200, stock_quantity: 70, description: 'Stylish black cotton-silk scarf.' },
-        { id: 226, product_name: 'Cotton Silk Scarf - White', price: 1250, stock_quantity: 110, description: 'Elegant white cotton-silk scarf.' },
-        { id: 227, product_name: 'Cotton Silk Scarf - Yellow', price: 1300, stock_quantity: 100, description: 'Bright yellow cotton-silk scarf.' },
-        { id: 228, product_name: 'Cotton Silk Scarf - Pink', price: 1350, stock_quantity: 90, description: 'Soft pink cotton-silk scarf.' },
-        
-      ];
-      this.product = products.find((p) => p.id === this.id);
-    },
-  };
-  </script>
-  
+    <div class="product-info">
+      <h2>{{ product.product_name }}</h2>
+      <p>Price: R {{ product.price }}</p>
+      <p>Stock Quantity: {{ product.stock_quantity }}</p>
+      <p>Type: {{ product.product_type }}</p>
+      <p>Description: {{ product.description }}</p>
+    </div>
+  </div>
+  <FooterPage />
+</template>
+
+<script>
+import axios from "axios";
+import NavbarPage from "@/components/NavbarPage.vue";
+import FooterPage from "@/components/FooterPage.vue";
+
+export default {
+  components: {
+    NavbarPage,
+    FooterPage,
+  },
+  data() {
+    return {
+      product: {},
+    };
+  },
+  async mounted() {
+    try {
+      const response = await axios.get(`http://localhost:3000/products/${this.$route.params.id}`);
+      this.product = response.data;
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  },
+};
+</script>
+
+<style scoped>
+.product-detail {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.product-images {
+  flex: 1;
+  max-width: 600px;
+}
+
+.product-main-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.product-info {
+  flex: 1;
+  max-width: 500px;
+  padding-left: 2rem;
+}
+
+.product-info h2 {
+  margin-bottom: 1rem;
+}
+</style>

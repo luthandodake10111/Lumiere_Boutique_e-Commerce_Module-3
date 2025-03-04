@@ -1,131 +1,122 @@
 <template>
-  <div class="grid-container">
-    <div
-      v-for="product in products"
-      :key="product.id"
-      class="product-card"
-      @click="goToProductDetail(product.id)"
-    >
-      <div class="image-container">
-        <img
-          :src="product.imageUrl"
-          alt="Product Image"
-          class="product-image"
-        />
-        <div class="overlay">
-          <p class="product-price"> R {{ product.price }}</p>
+  <!-- Product Cards -->
+  <div class="product-page">
+    <div class="product-list">
+      <div 
+        v-for="product in products" 
+        :key="product.id" 
+        class="product-card"
+        @click="goToProductDetails(product.id)"
+      >
+        <div class="product-image" :style="{ backgroundImage: 'url(' + product.image_url + ')' }">
+          <div class="product-info">
+            <p class="product-name">{{ product.product_name }}</p>
+            <p class="product-price">R {{ product.price }}</p>
+          </div>
         </div>
       </div>
-      <h3 class="product-name">{{ product.product_name }}</h3>
-      <!-- <p class="product-description">{{ product.description }}</p> -->
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
 
 export default {
-  // data() {
-  //   return {
-  //     products: [],
-  //     error: false
-  //   };
-  // },
-
-  data(){
+  data() {
     return {
-      products: [],
+      products: []
     };
   },
+  
   async mounted() {
     try {
-      const response = await axios.get("http://localhost:3000/products"); 
-      this.products = response.data;
+      const response = await axios.get("http://localhost:3000/products");
+      if (response.data.products) {
+        this.products = response.data.products;
+      } else {
+        console.error("Unexpected API response format:", response.data);
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   },
+  
   methods: {
-    goToProductDetail(productId) {
-      this.$router.push({ name: "product-detail", params: { id: productId } });
+    goToProductDetails(productId) {
+      this.$router.push({ name: 'ProductDetails', params: { id: productId } });
     }
   }
 };
 </script>
 
-
 <style scoped>
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: auto;
+.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
 }
 
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+}
+
 .product-card {
-  background: #ffffff;
-  border: 1px solid #ddd;
+  position: relative;
+  width: 100%;
+  height: 450px;
   border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  text-align: center;
   overflow: hidden;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-.image-container {
-  position: relative;
+  cursor: pointer;
+  background-color: whitesmoke;
 }
 
 .product-image {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover; 
-  border-radius: 8px;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  background-size: cover;
+  background-position: center;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  color: white;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 15px;
 }
 
-.image-container:hover .overlay {
-  opacity: 1;
+.product-info {
+  color: whitesmoke;
+  font-size: 18px;
+  position: absolute;
+  bottom: 30px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.6); 
+  padding: 10px;
+  border-radius: 4px;
 }
 
-.product-name,
-.product-price {
+.product-name {
   margin: 0;
-  padding: 0.5rem;
-  font-size: 1.0rem;
 }
 
-.product-description {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 10px 0;
+.product-price {
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(1, 2fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
-
-

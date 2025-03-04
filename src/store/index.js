@@ -31,7 +31,7 @@ async fetchProducts({ commit }) {
   try {
     const response = await fetch('http://localhost:3000/products');
     const data = await response.json();
-    commit('setProducts', data.products);
+    commit('setProducts', data);
   } catch (error) {
     console.error('Error fetching products:', error);
   }

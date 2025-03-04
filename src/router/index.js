@@ -30,9 +30,10 @@ const routes = [
     component: ProductPage,
   },
   {
-    path: '/ProductPage/:id',
-    name: 'Product_Detail',
+    path: '/product/:id',
+    name: 'ProductDetail',
     component: ProductDetail,
+    props: true,
   },
 //   {
 //     path: '/silk-scarves',

@@ -28,7 +28,7 @@ export default {
   },
   created() {
     const postId = this.$route.params.id;
-    axios.get(`http://localhost:3000/api/blog-posts/${postId}`)
+    axios.get(`http://localhost:3000/blog-posts/${postId}`)
       .then(response => {
         this.post = response.data;
       })
