@@ -23,7 +23,11 @@ export default createStore({
     },
     setProducts(state, products) {
       state.products = products;
-  }
+  },
+  singleProduct(state, product) {
+    state.product = product;
+},
+
   },
   actions: {
 
@@ -81,8 +85,18 @@ async fetchProducts({ commit }) {
         console.error(error);
         alert('Login failed');
       }
-    }
-  },
+    },
+
+    async singleProduct({ commit }) {
+      try {
+        const response = await fetch('http://localhost:3000/products');
+        const data = await response.json();
+        commit('singleProduct', data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+  }
+},
   getters:{
     allProducts: (state) => state.products,
   }

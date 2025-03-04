@@ -22,7 +22,7 @@
       return {
         products: [],
         error: false,
-        loading: true, // Adding loading state
+        loading: true,
       };
     },
     async mounted() {

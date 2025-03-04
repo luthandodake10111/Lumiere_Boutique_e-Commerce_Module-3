@@ -4,7 +4,7 @@
   <br><br><br>
   <h1>Explore Our Elegant Collection</h1>
 
-  <ProductCard />  
+  <ProductCard :products="products" />
   <FooterPage />
 </template>
 

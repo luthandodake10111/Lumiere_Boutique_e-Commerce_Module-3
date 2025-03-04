@@ -12,16 +12,11 @@
       </form>
     </div>
   </div>
-
-  <FooterPage />
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import FooterPage from '@/components/FooterPage.vue';
-
 export default {
-  components: { FooterPage },
   data() {
     return {
       userData: {

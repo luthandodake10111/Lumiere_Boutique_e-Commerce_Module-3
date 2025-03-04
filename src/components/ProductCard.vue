@@ -1,12 +1,11 @@
 <template>
-  <!-- Product Cards -->
   <div class="product-page">
     <div class="product-list">
       <div 
         v-for="product in products" 
         :key="product.id" 
         class="product-card"
-        @click="goToProductDetails(product.id)"
+        @click="openModal(product.id)"
       >
         <div class="product-image" :style="{ backgroundImage: 'url(' + product.image_url + ')' }">
           <div class="product-info">
@@ -16,16 +15,30 @@
         </div>
       </div>
     </div>
+
+    <!-- Include Product Detail Modal -->
+    <ProductDetail 
+      v-if="showModal" 
+      :productId="selectedProductId" 
+      :showModal="showModal" 
+      @close="closeModal"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import ProductDetail from "@/components/ProductDetail.vue";
 
 export default {
+  components: {
+    ProductDetail,
+  },
   data() {
     return {
-      products: []
+      products: [],
+      showModal: false,
+      selectedProductId: null,
     };
   },
   
@@ -43,14 +56,27 @@ export default {
   },
   
   methods: {
-    goToProductDetails(productId) {
-      this.$router.push({ name: 'ProductDetails', params: { id: productId } });
+    openModal(productId) {
+      this.selectedProductId = productId;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.selectedProductId = null;
     }
   }
 };
 </script>
 
+
 <style scoped>
+  .card {
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .card:hover {
+    transform: scale(1.05);
+  }
 .product-page {
   display: flex;
   flex-direction: column;
