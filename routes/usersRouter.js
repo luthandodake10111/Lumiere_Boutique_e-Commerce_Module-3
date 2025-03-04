@@ -1,6 +1,6 @@
 import express from 'express';
 import { getUsersCon, loginUserCon, registerUserCon} from '../controller/usersController.js';
-import { authenticateToken } from '../middleware/authMiddleware.js';
+import authenticateToken  from '../middleware/authMiddleware.js';
 
 
 const router = express.Router();
@@ -11,4 +11,3 @@ router.get('/',authenticateToken, getUsersCon)
 
 export default router;
 
- 
