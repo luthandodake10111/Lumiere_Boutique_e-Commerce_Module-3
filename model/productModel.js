@@ -8,7 +8,6 @@ ON product_images.product_id = products.product_id;`);
     return products;
 };
 
-
 const singleProducts = async (id) => {
     const [product] = await pool.query("SELECT * FROM products WHERE product_id = ?", [id]);
     return product.length > 0 ? product[0] : null;
