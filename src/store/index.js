@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-
+import axios from "axios";
 export default createStore({
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
@@ -33,9 +33,10 @@ export default createStore({
 
 async fetchProducts({ commit }) {
   try {
-    const response = await fetch('http://localhost:3000/products');
-    const data = await response.json();
-    commit('setProducts', data);
+    const response = await axios.get("http://localhost:3000/products");
+    console.log(response.data.products);
+    
+    commit('setProducts', response.data.products);
   } catch (error) {
     console.error('Error fetching products:', error);
   }

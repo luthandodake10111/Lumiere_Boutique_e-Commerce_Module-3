@@ -16,7 +16,9 @@
     "lucide-vue-next": "^0.476.0",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
+    "vue-image-zoomer": "^2.4.4",
     "vue-router": "^4.5.0",
+    "vue3-carousel": "^0.14.0",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

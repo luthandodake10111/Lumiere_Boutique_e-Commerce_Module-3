@@ -11,6 +11,7 @@ import Register from '@/views/Register.vue';
 import Blog from "../views/Blog.vue";
 import BlogPost from "../views/BlogPost.vue";
 import ProductDetail from '@/components/ProductDetail.vue';
+import CartPage from '@/views/CartPage.vue';
 
 const routes = [
   {
@@ -30,10 +31,16 @@ const routes = [
     component: ProductPage,
   },
   {
-    path: '/product/:id',
-    name: 'product-detail',
+    path: '/products/:id',
+    name: 'productDetail',
     component: ProductDetail,
     props: true,
+  },
+  {
+    path: '/CartPage',
+    name: 'CartPage',
+    component: CartPage,
+   
   },
 //   {
 //     path: '/silk-scarves',

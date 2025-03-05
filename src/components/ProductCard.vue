@@ -1,11 +1,12 @@
 <template>
+  <!-- Product Cards -->
   <div class="product-page">
     <div class="product-list">
       <div 
         v-for="product in products" 
         :key="product.id" 
         class="product-card"
-        @click="openModal(product.id)"
+        @click="goToProductDetail(product.product_id)"
       >
         <div class="product-image" :style="{ backgroundImage: 'url(' + product.image_url + ')' }">
           <div class="product-info">
@@ -15,59 +16,29 @@
         </div>
       </div>
     </div>
-
-    <!-- Include Product Detail Modal -->
-    <ProductDetail 
-      v-if="showModal" 
-      :productId="selectedProductId" 
-      :showModal="showModal" 
-      @close="closeModal"
-    />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import ProductDetail from "@/components/ProductDetail.vue";
+
 
 export default {
-  components: {
-    ProductDetail,
-  },
-  data() {
-    return {
-      products: [],
-      showModal: false,
-      selectedProductId: null,
-    };
-  },
   
-  async mounted() {
-    try {
-      const response = await axios.get("http://localhost:3000/products");
-      if (response.data.products) {
-        this.products = response.data.products;
-      } else {
-        console.error("Unexpected API response format:", response.data);
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
+  computed:{
+    products(){
+      return this.$store.state.products
     }
   },
   
   methods: {
-    openModal(productId) {
-      this.selectedProductId = productId;
-      this.showModal = true;
-    },
-    closeModal() {
-      this.showModal = false;
-      this.selectedProductId = null;
+    goToProductDetail(productId) {
+      console.log(productId);
+      
+      this.$router.push({ name: 'productDetail', params: { id: productId } });
     }
   }
 };
 </script>
-
 
 <style scoped>
   .card {

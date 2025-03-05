@@ -42,5 +42,10 @@ body, p, .text .nav {
 </style>
 <script>
 export default {
+ 
+  async mounted() {
+    this.$store.dispatch('fetchProducts')
+  
+  },
 };
 </script>
