@@ -20,8 +20,6 @@
 </template>
 
 <script>
-
-
 export default {
   
   computed:{
@@ -54,7 +52,6 @@ export default {
   align-items: center;
   padding: 2rem;
 }
-
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -64,7 +61,6 @@ export default {
   margin: auto;
   justify-content: center;
 }
-
 .product-card {
   position: relative;
   width: 100%;
@@ -83,12 +79,14 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 15px;
+  /* padding: 15px; */
 }
-
+.product-image:hover {
+  transform: scale(1.05);
+}
 .product-info {
   color: whitesmoke;
-  font-size: 18px;
+  font-size: 16px;
   position: absolute;
   bottom: 30px;
   left: 15px;

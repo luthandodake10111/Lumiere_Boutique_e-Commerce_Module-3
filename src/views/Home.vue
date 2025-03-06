@@ -1,35 +1,30 @@
 <template>
-    <NavbarPage />
-    <CarouselPage />
-    <router-view></router-view>
+  <NavbarPage />
+  <CarouselPage />
+  <router-view></router-view>
 
-    <!-- Features Section -->
-    <section class="features">
-  <div class="grid-container">
-    <div v-for="(feature, index) in features" :key="index" class="card">
-      <img :src="feature.image" 
-        class="card-img-top" 
-        :alt="feature.alt"
-        :style="{ width: feature.size, height: feature.size }">
-
-      <div class="card-body">
-        <h5 class="card-title">{{ feature.title }}</h5>
-        <p class="card-text">{{ feature.description }}</p>
-        <router-link to="/AboutPage" class="btn btn-primary">Read More</router-link>
+  <!-- Features Section -->
+  <section class="features">
+    <div class="grid-container">
+      <div v-for="(feature, index) in features" :key="index" class="card">
+        <img :src="feature.image" class="card-img-top" :alt="feature.alt">
+        <div class="card-body">
+          <h5 class="card-title">{{ feature.title }}</h5>
+          <p class="card-text">{{ feature.description }}</p>
+          <br><br>
+          <router-link to="/AboutPage" class="btn btn-primary">Read More</router-link>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <FooterPage />
 </template>
 
 <script>
-
 import NavbarPage from "@/components/NavbarPage.vue";
 import CarouselPage from "@/components/CarouselPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
-
 
 export default {
   components: {
@@ -38,55 +33,48 @@ export default {
     FooterPage
   },
   data() {
-  return {
-    socialLinks: {
-      instagram: "https://instagram.com",
-      twitter: "https://twitter.com",
-      tiktok: "https://www.tiktok.com"
-    },
-    
-    features: [
-      {
-        title: "Premium Quality",
-        description: "Our scarves are crafted with the finest silk and cotton blends.",
-        image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/cotton%20silk%20scarfs/Brown.jpg",
-        alt: "Premium Quality",
-        link: "#premium-quality",
-        size: "180px" 
+    return {
+      socialLinks: {
+        instagram: "https://instagram.com",
+        twitter: "https://twitter.com",
+        tiktok: "https://www.tiktok.com"
       },
-      {
-        title: "Elegant Designs",
-        description: "Timeless patterns that complement any outfit.",
-        image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/galary/elegant%20designs%20of%20silk%20scarves.jpg",
-        alt: "Elegant Designs",
-        link: "#elegant-designs",
-        size: "180px"
-      },
-      {
-        title: "Luxury Silk Scarves",
-        description: "Explore our finest collection of silk and cotton blend scarves, crafted for elegance.",
-        image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/silk%20cotton%20carousel%202.jpg",
-        alt: "Elegant Scarf",
-        link: "#premium-quality",
-        size: "190px"
-      },
-      {
-        title: "Worldwide Shipping",
-        description: "We deliver luxury right to your doorstep with efficiency.",
-         image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/galary/worldwide-shipping-icon-5.jpg",
-        alt: "Worldwide Shipping",
-        link: "#worldwide-shipping",
-        size: "190px"
-      }
-    ]
-  };
-}
+      features: [
+        {
+          title: "Premium Quality",
+          description: "Our scarves are crafted with the finest silk and cotton blends.",
+          image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/cotton%20silk%20scarfs/Brown.jpg",
+          alt: "Premium Quality",
+          link: "#premium-quality"
+        },
+        {
+          title: "Elegant Designs",
+          description: "Timeless patterns that complement any outfit.",
+          image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/galary/elegant%20designs%20of%20silk%20scarves.jpg",
+          alt: "Elegant Designs",
+          link: "#elegant-designs"
+        },
+        {
+          title: "Luxury Silk Scarves",
+          description: "Explore our finest collection of silk and cotton blend scarves, crafted for elegance.",
+          image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/carousel%20slides/silk%20cotton%20carousel%202.jpg",
+          alt: "Elegant Scarf",
+          link: "#premium-quality"
+        },
+        {
+          title: "Worldwide Shipping",
+          description: "We deliver luxury right to your doorstep with efficiency.",
+          image: "https://luthandodake10111.github.io/Lumiere_Boutique_e-Commerce_Module-3/Vero%20Social%20images%20and%20icons/Images/galary/worldwide-shipping-icon-5.jpg",
+          alt: "Worldwide Shipping",
+          link: "#worldwide-shipping"
+        }
+      ]
+    };
+  }
 }
 </script>
 
 <style scoped>
-
-
 /* Features Section */
 .grid-container {
   display: grid;
@@ -96,7 +84,12 @@ export default {
   margin: auto;
   padding: 2rem;
 }
-
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 .card {
   background: whitesmoke !important;
   padding: 1.5rem;
@@ -104,6 +97,8 @@ export default {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   font-size: medium;
+  width: 100%;
+  height: 100pxy;
 }
 
 .card img {
@@ -134,7 +129,6 @@ export default {
 /* Footer Styles */
 .footer {
   background-color: whitesmoke;
-  /* color: #333333; */
   padding: 2rem;
 }
 
@@ -155,7 +149,7 @@ export default {
 
 .footer p, .footer a {
   font-size: 14px;
-  color: #333333;;
+  color: #333333;
 }
 
 .footer a {
@@ -165,10 +159,10 @@ export default {
 .footer a:hover {
   color: #D4AF37;
 }
+
 /* Styling for Contact Info */
 .contact-info {
-  color: whitesmoke; 
-
+  color: whitesmoke;
 }
 
 .social-media {
@@ -192,12 +186,11 @@ export default {
   color: #bbb;
 }
 
+/* Ensure card images are sized correctly */
 .card-img-top {
-  width: 100px; 
-  height: 100px;
+  width: 100%;
+  height: auto;
   object-fit: cover;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
-
-
 </style>

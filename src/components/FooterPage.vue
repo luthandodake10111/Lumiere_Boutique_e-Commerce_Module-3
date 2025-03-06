@@ -6,15 +6,12 @@
         <input type="email" placeholder="Enter your email address" v-model="email" />
         <button @click="subscribe">Sign Up</button>
       </div>
-      <br>
-
-    </div> 
+    </div>
     <div class="footer-content">
       <div class="footer-section">
         <h3>Shopping Online</h3>
         <ul>
           <li><router-link to="/delivery-returns">Delivery & Returns</router-link></li>
-          <!-- <li><router-link to="/size-guide">Size Guide</router-link></li> -->
         </ul>
       </div>
       <div class="footer-section">
@@ -41,26 +38,14 @@
         </div>
       </div>
     </div>
-    <!-- <div class="payment-section">
-      <p>Pay securely with:</p>
-      <div class="payment-icons">
-        <img src="/visa.png" alt="Visa" />
-        <img src="/mastercard.png" alt="MasterCard" />
-        <img src="/paypal.png" alt="PayPal" />
-      </div>
-    </div> -->
     <div class="footer-section">
-        <h3>Contact Us</h3>
-        <p class="contact-info">Email: contact@lumiereboutique.org.za</p>
-        <p class="contact-info">Phone: +27 123 4567</p>
-        <p class="contact-info">Address: 123 Fashion St, Cape Town, South Africa</p>
-      </div>
+      <h3>Contact Us</h3>
+      <p class="contact-info">Email: contact@lumiereboutique.org.za</p>
+      <p class="contact-info">Phone: +27 123 4567</p>
+      <p class="contact-info">Address: 123 Fashion St, Cape Town, South Africa</p>
+    </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Lumiere Boutique. All Rights Reserved.</p>
-      <div class="cookie-consent">
-        <button @click="allowCookies">Allow Cookies</button>
-        <button @click="learnMore">Learn More</button>
-      </div>
     </div>
   </footer>
 </template>
@@ -82,12 +67,6 @@ export default {
       alert(`Subscribed with: ${this.email}`);
       this.email = "";
     },
-    allowCookies() {
-      alert("Cookies Allowed");
-    },
-    learnMore() {
-      alert("More about cookies");
-    }
   }
 };
 </script>
@@ -95,13 +74,18 @@ export default {
 <style scoped>
 .footer {
   background-color: whitesmoke;
-  padding: 2rem;
+  padding: 1rem; /* Reduced padding */
   color: #333;
+  font-size: 14px; /* Smaller font size */
 }
 
 .blog {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reduced margin */
+}
+
+.blog h3 {
+  font-size: 16px; /* Smaller heading size */
 }
 
 .blog-form {
@@ -111,23 +95,24 @@ export default {
 }
 
 .blog input {
-  padding: 10px;
+  padding: 8px; /* Smaller padding */
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 14px; /* Smaller font size */
 }
 
 .blog button {
   background-color: black;
   color: whitesmoke;
-  padding: 10px 15px;
+  padding: 8px 12px; /* Smaller padding */
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 14px; /* Smaller font size */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.blog button:hover,
-.cookie-consent button:hover {
+.blog button:hover {
   background-color: #D4AF37;
   color: black;
 }
@@ -136,7 +121,18 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 1rem; /* Reduced gap */
+  margin-bottom: 1rem; /* Reduced margin */
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 150px; /* Ensure sections don't get too narrow */
+}
+
+.footer-section h3 {
+  font-size: 16px; /* Smaller heading size */
+  margin-bottom: 8px; /* Reduced margin */
 }
 
 .footer-section ul {
@@ -145,16 +141,13 @@ export default {
 }
 
 .footer-section li {
-  margin-bottom: 8px;
+  margin-bottom: 6px; /* Reduced margin */
 }
-.footer h3 {
-    margin-bottom: 12px;
-    color: #D4AF37;
-  }
 
 .footer a {
   text-decoration: none;
   color: #333;
+  font-size: 14px; /* Smaller font size */
 }
 
 .footer a:hover {
@@ -163,36 +156,21 @@ export default {
 
 .social-media {
   display: flex;
-  gap: 12px;
+  gap: 8px; /* Reduced gap */
 }
 
-/* .payment-section {
-  text-align: center;
-  margin-top: 1rem;
+.social-icon {
+  font-size: 14px; /* Smaller font size */
 }
 
-.payment-icons img {
-  width: 50px;
-  margin: 0 10px;
-} */
+.contact-info {
+  font-size: 14px; /* Smaller font size */
+  margin-bottom: 6px; /* Reduced margin */
+}
 
 .footer-bottom {
   text-align: center;
-  margin-top: 1.5rem;
-}
-
-.cookie-consent button {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-top: 1rem; /* Reduced margin */
+  font-size: 12px; /* Smaller font size */
 }
 </style>
-
-
-  
-
-

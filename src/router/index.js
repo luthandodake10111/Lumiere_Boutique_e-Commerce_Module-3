@@ -5,6 +5,10 @@ import AboutPage from '@/views/AboutPage.vue';
 import ProductPage from '../views/ProductPage.vue';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
+import ContactPage from "@/views/ContactPage.vue";
+import TrackOrderPage from "@/views/TrackOrderPage.vue";
+import FAQsPage from "@/views/FAQsPage.vue";
+import SocialResponsibilityPage from "@/views/SocialResponsibilityPage.vue";
 // import SilkScarvesPage from '../views/SilkScarvesPage.vue';
 // import CottonBlendPage from '../views/CottonBlendPage.vue';
 // import BandanasPage from '../views/BandanasPage.vue';
@@ -12,6 +16,7 @@ import Blog from "../views/Blog.vue";
 import BlogPost from "../views/BlogPost.vue";
 import ProductDetail from '@/components/ProductDetail.vue';
 import CartPage from '@/views/CartPage.vue';
+import CarouselProductImages from '@/components/CarouselProductImages.vue';
 
 const routes = [
   {
@@ -36,6 +41,12 @@ const routes = [
     component: ProductDetail,
     props: true,
   },
+  {
+  path: '/products/:id',
+  name: 'productImages',
+  component: CarouselProductImages,
+  props: true,
+},
   {
     path: '/CartPage',
     name: 'CartPage',
@@ -67,14 +78,39 @@ const routes = [
   name: Register,
   component: () => import('../views/Register.vue')
 },
-  {
+{
     path: "/blog",
     component: Blog
-  },
-  {
+},
+{
     path: "/blog/:id",
     component: BlogPost
-  }
+},
+{
+  path: "/contact",
+  name: "Contact",
+  component: ContactPage,
+},
+{
+  path: "/track-order",
+  name: "TrackOrder",
+  component: TrackOrderPage,
+},
+{
+  path: "/faqs",
+  name: "FAQs",
+  component: FAQsPage,
+},
+{
+  path: "/AboutPage",
+  name: "AboutPage",
+  component: AboutPage,
+},
+{
+  path: "/social-responsibility",
+  name: "SocialResponsibility",
+  component: SocialResponsibilityPage,
+},
 
 ];
 

@@ -88,7 +88,7 @@ export default {
   padding: 10px 20px;
   box-shadow: 0px 4px 6px #2c3e50;
   border-radius: 10px;
-  height: 75px;
+  height: 95px;
   width: 100%;
   z-index: 1000;
   position: fixed;

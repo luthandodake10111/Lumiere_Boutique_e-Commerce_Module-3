@@ -6,10 +6,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    
     <style>
-      *{
+      @font-face {
+        font-family: 'Bodoni';
+        src: url('./assets/fonts/libre-bodoni-font/LibrebodoniBolditalic-9AqB.otf') format('opentype');
+      }
+
+      @font-face {
+        font-family: 'Raleway';
+        src: url('./assets/fonts/raleway-font/Raleway-BVpl.ttf') format('truetype');
+      }
+
+      /* Apply font globally */
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1, h2, h3, h4, h5, h6, .heading, .btn {
+        font-family: 'Bodoni', serif !important;
+        text-align: center !important;
+      }
+
+      body, p, .text, .nav {
+        font-family: 'Raleway', sans-serif !important;
+        text-align: center !important;
       }
     </style>
   </head>
