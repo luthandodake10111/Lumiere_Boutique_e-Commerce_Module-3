@@ -1,4 +1,5 @@
-<template>
+<template> 
+<NavbarPage />
     <div class="faqs-page">
       <h1>FAQs</h1>
       <div class="faq-item">
@@ -13,6 +14,8 @@
   </template>
   
   <script>
+import NavbarPage from '@/components/NavbarPage.vue';
+
   export default {
     name: "FAQsPage",
   };

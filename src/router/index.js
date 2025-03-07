@@ -9,14 +9,13 @@ import ContactPage from "@/views/ContactPage.vue";
 import TrackOrderPage from "@/views/TrackOrderPage.vue";
 import FAQsPage from "@/views/FAQsPage.vue";
 import SocialResponsibilityPage from "@/views/SocialResponsibilityPage.vue";
-// import SilkScarvesPage from '../views/SilkScarvesPage.vue';
-// import CottonBlendPage from '../views/CottonBlendPage.vue';
-// import BandanasPage from '../views/BandanasPage.vue';
 import Blog from "../views/Blog.vue";
 import BlogPost from "../views/BlogPost.vue";
 import ProductDetail from '@/components/ProductDetail.vue';
 import CartPage from '@/views/CartPage.vue';
-import CarouselProductImages from '@/components/CarouselProductImages.vue';
+import ScarfPayment from "@/components/ScarfPayment.vue";
+import SuccessPage from "@/components/SuccessPage.vue";
+import CancelPage from "@/components/CancelPage.vue";
 
 const routes = [
   {
@@ -41,33 +40,29 @@ const routes = [
     component: ProductDetail,
     props: true,
   },
-  {
-  path: '/products/:id',
-  name: 'productImages',
-  component: CarouselProductImages,
-  props: true,
-},
+
   {
     path: '/CartPage',
     name: 'CartPage',
     component: CartPage,
    
   },
-//   {
-//     path: '/silk-scarves',
-//     name: 'silk-scarves',
-//     component: SilkScarvesPage,
-//   },
-//   {
-//     path: '/cotton-blend',
-//     name: 'cotton-blend',
-//     component: CottonBlendPage,
-//   },
-//   {
-//     path: '/bandanas',
-//     name: 'bandanas',
-//     component: BandanasPage,
-//   },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: ScarfPayment,
+    
+  },
+  {
+    path: "/success",
+    name: "Success",
+    component: SuccessPage,
+  },
+  {
+    path: "/cancel",
+    name: "Cancel",
+    component: CancelPage,
+  },
 {
   path: '/Login',
   name: Login,

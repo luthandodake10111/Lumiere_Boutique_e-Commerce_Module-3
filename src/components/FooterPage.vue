@@ -56,10 +56,10 @@ export default {
     return {
       email: "",
       socialLinks: {
-        instagram: "https://instagram.com",
-        twitter: "https://twitter.com",
-        tiktok: "https://www.tiktok.com"
-      }
+        instagram: "https://www.instagram.com/we_are_lumiere_boutique_/",
+        twitter: "https://x.com/LumiereWe75608",
+        tiktok: "https://www.tiktok.com/@we_are_lumiere_boutique_"
+      } 
     };
   },
   methods: {

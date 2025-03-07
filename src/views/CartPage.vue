@@ -59,24 +59,10 @@
       return {
         page: "products",
         cart: [],
-        products: [
-          {
-            id: 1,
-            name: "Silk and Cotton Scarf",
-            price: 280,
-            image: "https://www.fortheloveofsilk.co.za/Portals/16/Hotcakes/Data/products/39c6ae0f-859b-4331-8ea9-02810b87dadf/medium/City-Stripe-Blue.jpg",
-            quantity: 1,
-          },
-          {
-            id: 2,
-            name: "Bandana",
-            price: 150,
-            image: "https://img.fruugo.com/product/0/55/317779550_0340_0340.jpg",
-            quantity: 1,
-          },
-        ],
+        products: [ ],
       };
     },
+    
     methods: {
       increaseQuantity(product) {
         product.quantity += 1;

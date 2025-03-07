@@ -1,18 +1,25 @@
 <template>
   <NavbarPage />
   <br><br><br><br><br>
+  
   <div v-if="loading" class="loading">Loading product details...</div>
+  
   <div v-else-if="error" class="error">
     <p>Failed to load product. Please try again.</p>
     <button @click="retryLoading" class="retry-button">Retry</button>
   </div>
+  
   <div v-else-if="product" class="product-detail">
     <!-- Bootstrap Carousel -->
     <div class="product-images">
       <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <div v-for="(image, index) in productImages" :key="index" :class="['carousel-item', { active: index === 0 }]">
-            <img :src="image" :alt="`Product Image ${index + 1}`" class="d-block w-100 product-main-image" />
+          <div 
+            v-for="(image, index) in productImages" 
+            :key="index" 
+            :class="['carousel-item', { active: index === 0 }]"
+          >
+            <img :src="image.image_url" :alt="`Product Image ${index + 1}`" class="d-block w-100 product-main-image" />
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -25,6 +32,7 @@
         </button>
       </div>
     </div>
+
     <!-- Product Info -->
     <div class="product-info">
       <h2>{{ product.product_name }}</h2>
@@ -34,25 +42,31 @@
       <p v-if="product.stock_quantity > 0" class="in-stock">In Stock</p>
       <p v-else class="out-of-stock">Out of Stock</p>
       <br><br>
+
       <!-- Quantity Control -->
       <div class="quantity-control">
-        <button class="quantity-btn" @click="decreaseQuantity(product)">-</button>
-        <span>{{ product.quantity }}</span>
-        <button class="quantity-btn" @click="increaseQuantity(product)">+</button>
+        <button class="quantity-btn" @click="decreaseQuantity">-</button>
+        <span>{{ quantity }}</span>
+        <button class="quantity-btn" @click="increaseQuantity">+</button>
       </div>
-      <button class="add-btn" @click="addItemToCart(product)">Add to Cart</button>
+      
+      <button class="add-btn" @click="addItemToCart">Add to Cart</button>
+      
       <RouterLink :to="{ name: 'CartPage' }">
         <button class="nav-btn">View Cart</button>
       </RouterLink>
     </div>
   </div>
+
   <div v-else class="error">
     <p>Product not found.</p>
   </div>
+
   <FooterPage />
 </template>
 
 <script>
+import axios from "axios";
 import NavbarPage from "@/components/NavbarPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
 
@@ -64,23 +78,11 @@ export default {
   data() {
     return {
       product: null,
+      productImages: [],
       loading: false,
       error: false,
       quantity: 1,
     };
-  },
-  computed: {
-    productImages() {
-      if (!this.product) return [];
-
-      // Get all images matching the current product_id
-      const images = this.$store.state.products
-        .filter(p => p.product_id === this.product.product_id)
-        .map(p => p.image_url)
-        .slice(0, 3); // Limit to only 3 images
-
-      return images;
-    }
   },
   async created() {
     await this.loadProduct();
@@ -91,11 +93,11 @@ export default {
       this.error = false;
       try {
         const productId = this.$route.params.id;
-        const product = this.$store.state.products?.find(
-          (p) => p.product_id == productId
-        );
-        if (product) {
-          this.product = product;
+        const response = await axios.get(`/api/products/${productId}`);
+        
+        if (response.data) {
+          this.product = response.data[0]; // Assuming first item contains product details
+          this.productImages = response.data; // All returned entries are images for this product
         } else {
           this.error = true;
         }
@@ -109,26 +111,22 @@ export default {
     retryLoading() {
       this.loadProduct();
     },
-    increaseQuantity(product) {
-      product.quantity += 1;
+    increaseQuantity() {
+      this.quantity += 1;
     },
-    decreaseQuantity(product) {
-      if (product.quantity > 1) {
-        product.quantity -= 1;
+    decreaseQuantity() {
+      if (this.quantity > 1) {
+        this.quantity -= 1;
       }
     },
-    addItemToCart(product) {
-      const item = this.$store.state.cart.find((item) => item.product.id === product.id);
-      if (item) {
-        item.quantity += product.quantity;
-      } else {
-        this.$store.commit('addToCart', { product: { ...product }, quantity: product.quantity });
-      }
-      product.quantity = 1;
+    addItemToCart() {
+      this.$store.commit("addToCart", { product: this.product, quantity: this.quantity });
+      this.quantity = 1;
     },
   },
 };
 </script>
+
 
 <style scoped>
 .product-detail {

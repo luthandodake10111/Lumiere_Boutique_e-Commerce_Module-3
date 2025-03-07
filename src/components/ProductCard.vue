@@ -4,7 +4,7 @@
     <div class="product-list">
       <div 
         v-for="product in products" 
-        :key="product.id" 
+        :key="product.product_id" 
         class="product-card"
         @click="goToProductDetail(product.product_id)"
       >
@@ -20,21 +20,34 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  
-  computed:{
-    products(){
-      return this.$store.state.products
-    }
+  data() {
+    return {
+      products: [],
+    };
   },
-  
+
+  async mounted() {
+    await this.fetchProducts();
+  },
+
   methods: {
+    async fetchProducts() {
+      try {
+        const response = await axios.get('/api/products/with-images'); // Update this with the correct backend route
+        this.products = response.data;
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    },
+
     goToProductDetail(productId) {
       console.log(productId);
-      
       this.$router.push({ name: 'productDetail', params: { id: productId } });
-    }
-  }
+    },
+  },
 };
 </script>
 

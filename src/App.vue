@@ -1,4 +1,5 @@
 <template>
+  <!-- {{ $store.state.experiment }} -->
   <router-view></router-view>
 </template>
 

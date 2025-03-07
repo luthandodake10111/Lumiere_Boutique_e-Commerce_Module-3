@@ -17,7 +17,7 @@
       </div>
     </div>
   </section>
-
+<ProductCard />
   <FooterPage />
 </template>
 
@@ -25,11 +25,13 @@
 import NavbarPage from "@/components/NavbarPage.vue";
 import CarouselPage from "@/components/CarouselPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
+import ProductCard from "@/components/ProductCard.vue";
 
 export default {
   components: {
     NavbarPage,
     CarouselPage,
+    ProductCard,
     FooterPage
   },
   data() {

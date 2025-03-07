@@ -15,14 +15,7 @@
     </div>
 
     <div class="nav-right">
-      <!-- Wishlist and Account Buttons -->
-      <!-- <button class="wishlist-btn">&#9825;</button> -->
       <button class="account-btn">&#128100;</button>
-
-      <!-- Icons -->
-      <a href="#"><i class="fas fa-search"></i></a>
-      <a href="#"><i class="fas fa-bell"></i></a>
-
       <router-link to="/cart">
         <i class="fas fa-shopping-bag"></i>
       </router-link>
@@ -30,27 +23,16 @@
       <button class="checkout-btn">Checkout</button>
     </div>
   </nav>
-
+  
   <!-- Menu Overlay -->
   <div v-if="menuOpen" class="menu-overlay">
     <button class="close-btn" @click="toggleMenu">&times; Close</button>
     <ul class="nav-links">
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/AboutPage">About</router-link></li>
-
-      <!-- Dropdown for Products -->
-      <li class="dropdown">
-  <a href="#" @click="showDropdown = !showDropdown">Products</a>
-  <ul v-if="showDropdown" class="dropdown-menu">
-    <li><router-link to="/ProductPage">All Products</router-link></li>
-    <li><router-link to="/silk-scarves">Silk Scarves</router-link></li>
-    <li><router-link to="/cotton-blend">Cotton Blend Scarves</router-link></li>
-    <li><router-link to="/bandanas">Bandanas</router-link></li>
-  </ul>
-</li>
-      <li><router-link to="/new-arrivals">New Arrivals</router-link></li>
-      <li><router-link to="/blog">Blog</router-link></li>
-      <li><router-link to="/contact">Contact</router-link></li>
+      <li><router-link to="/ProductPage">Products</router-link></li>
+      <li><router-link to="/Blog">Blog</router-link></li>
+      <li><router-link to="/ContactPage">Contact</router-link></li>
       <li><router-link to="/login">Login</router-link></li>
     </ul>
   </div>
