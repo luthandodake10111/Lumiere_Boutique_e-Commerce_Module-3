@@ -1,6 +1,7 @@
 import {config} from 'dotenv';
 import mysql from 'mysql2/promise';
 
+
 config();
 
 // Create a connection pool
