@@ -1,208 +1,89 @@
 <template>
-    <div>
-        <div class="login-container">
-        <div class="login-form">
+  <div>
+    <div class="login-container">
+      <div class="login-form">
         <h2>Login</h2>
         <form @submit.prevent="login">
-        <input v-model="email" type="email" placeholder="Email" required />
-        <br />
-        <input v-model="password" type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
+          <input v-model="loginData.email" type="email" placeholder="Email" required />
+          <input v-model="loginData.password" type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
         </form>
-    </div>
-    </div>
-    <div class="register-link">
-      <h4>Don't have an account? </h4>
-      <router-link to="/Register" class="btn"> Register </router-link>
-      
-    </div>
-    <br>
-        
-
-        <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Contact Us</h3>
-        <p><b>Email:</b> contact@lumiereboutique.org.za</p>
-        <p><b>Phone:</b> +27 123 4567</p>
-        <p><b>Address:</b> 123 Fashion St, Cape Town, South Africa</p>
-      </div>
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="/about">About</router-link></li>
-          <li><router-link to="/ProductPage">Products</router-link></li>
-          <li><router-link to="/contact">Contact</router-link></li>
-          <li><router-link to="/Login">Login</router-link></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Follow Us</h3>
-        <div class="social-media">
-          <a href="https://facebook.com" target="_blank" class="social-icon">Facebook</a>
-          <a href="https://instagram.com" target="_blank" class="social-icon">Instagram</a>
-          <a href="https://twitter.com" target="_blank" class="social-icon">Twitter</a>
-          <a href="https://www.tiktok.com" target="_blank" class="social-icon">TikTok</a>
+        <br />
+        <div class="register-link">
+          <h4>Don't have an account?</h4>
+          <br />
+          <router-link to="/register" class="btn">Register</router-link>
         </div>
       </div>
-      <div class="bg-dark text-white text-center py-3 fixed-bottom">
-        <p>&copy; 2025 Lumiere Boutique. All Rights Reserved.</p>
-      </div>
     </div>
-  </footer>
+
+    <!-- Error Modal -->
+    <div v-if="modalVisible" class="modal-overlay">
+  <div class="modal">
+    <h2>Login Failed</h2>
+    <p>{{ errorMessage }}</p>
+    <button @click="closeModal" class="close-modal">Close</button>
+  </div>
 </div>
 
-    
+
+    <FooterLine />
+  </div>
 </template>
 
 <script>
-
 import { mapActions } from 'vuex';
+import FooterLine from '../components/FooterLine.vue';
 
 export default {
-    data() {
-        return { email: '', password: '', message: '' };
-    },
-    methods: {
-      ...mapActions(['login']),
-      async login() {
+  components: {
+    FooterLine
+  },
+  data() {
+    return {
+      loginData: {
+        email: '',
+        password: ''
+      },
+      modalVisible: false,  // Controls modal visibility
+      errorMessage: '',     // Holds error message
+    };
+  },
+  methods: {
+    ...mapActions(['login']),
+    async login() {
       try {
-        await this.$store.dispatch('login', {
-          email: this.email,
-          password: this.password
-        });
+        await this.$store.dispatch('login', this.loginData);
         this.$router.push('/');
       } catch (error) {
-        console.error('Login failed:', error.message);
+        console.error("Login failed:", error);
+        this.errorMessage = "Invalid email or password. Please try again."; // Set error message
+        this.modalVisible = true;  // Show the modal
       }
+    },
+    closeModal() {
+      this.modalVisible = false;  // Close the modal when clicked
     }
-      
-    
   }
 };
 </script>
 
-
 <style scoped>
 * {
-  font-family: "Lato", "Montserrat", "Playfair Display", "Merriweather";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto';
   text-align: center;
-  color: #2c3e50;
-}
-
-/* Navbar Base Styling */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px;
-  background-color: #333333;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  color: #d4af37;
-  height: 155px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  width: 150px;
-  height: auto;
-  margin-right: 10px;
-  border-radius: 95%;
-  transition: transform 0.5s ease;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  position: relative;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  padding: 25px 15px;
-  transition: color 0.3s ease;
-}
-
-/* Navbar Hover & Active Page Effect */
-.nav a:hover,
-.nav a.active {
-  color: gold !important;
-}
-
-/* Dropdown Styling */
-.dropdown {
-  position: relative;
-}
-
-/* Hidden Dropdown Menu */
-.dropdown-menu {
-  position: absolute;
-  background: #fff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 0.5rem 0;
-  top: 100%;
-  left: 0;
-  min-width: 150px;
-
-  /* Hidden by default */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Dropdown Menu Links */
-.dropdown-menu li {
-  padding: 10px 15px;
-  white-space: nowrap;
-}
-
-.dropdown-menu a {
-  color: #333;
-  display: block;
-  padding: 10px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* Hover Effect for Dropdown Links */
-.dropdown-menu a:hover {
-  background: gold;
-  color: white;
-}
-
-.hero {
-  text-align: center;
-  padding: 5rem 2rem;
-  background: linear-gradient(to right, #f8f9fa, #e0e0e0);
-  color: #003366;
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   background-color: black;
-  border: none;
+  color: white;
   border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
   cursor: pointer;
   font-size: 1rem;
-  color: white;
 }
 
 .btn:hover {
@@ -220,11 +101,11 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0; /* Light background for contrast */
+  background-color: #f0f0f0;
 }
 
 .login-form {
-  background-color: #ffffff;
+  background-color: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -233,24 +114,23 @@ body, html {
   width: 100%;
 }
 
-h2 {
-  color: #003366;
-  margin-bottom: 1.5rem;
-}
-
 input {
   width: 100%;
   padding: 0.8rem;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
+}
+
+h2 {
+  color: black;
+  margin-bottom: 1.5rem;
 }
 
 button {
   width: 100%;
   padding: 0.8rem;
-  background-color: #003366;
+  background-color: black;
   border: none;
   border-radius: 4px;
   color: white;
@@ -260,115 +140,101 @@ button {
 }
 
 button:hover {
-  background-color: #d4af37; /* Gold hover effect */
+  background-color: #d4af37;
 }
 
 .register-link {
-  text-align: center;
-  margin-top: 1rem;
+  margin-top: 10px;
 }
 
 .register-link button {
   background-color: transparent;
   border: none;
-  color: #003366;
+  color: #D4AF37;
   cursor: pointer;
   font-size: 1rem;
   text-decoration: underline;
 }
 
-.card {
-  background: gold !important;
-  padding: 1.5rem;
-  margin: 2rem auto;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  max-width: 1200px;
-}
-
-.feature {
-  text-decoration: none;
-  color: inherit;
-  padding: 1.5rem;
-  background: #fff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.feature:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.feature h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.feature p {
-  font-size: 1rem;
-  color: #777;
-}
-
-/* Footer Styles */
-.footer {
-  background-color: #333333;
-  color: white;
-}
-
-.footer-content {
+/* Modal Styles */
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  visibility: visible; /* Ensure it's visible when v-if is true */
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.footer-section {
-  flex: 1;
-}
-
-.footer h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #d4af37;
-}
-
-.footer p,
-.footer a {
-  font-size: 14px;
-  color: #bbb;
-  line-height: 1.4;
-}
-
-.footer a {
-  text-decoration: none;
-}
-
-.footer a:hover {
-  color: #d4af37;
-}
-
-.social-media {
-  display: flex;
-  gap: 12px;
-}
-
-.social-icon {
-  font-size: 16px;
-  color: #bbb;
-}
-
-.social-icon:hover {
-  color: #d4af37;
-}
-
-.footer-bottom {
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
   text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  color: #bbb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+
+.close-modal {
+  background: #000;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.close-modal:hover {
+  background: #444;
+}
+
+
+/* Modal Animation */
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden; /* Initially hidden */
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s ease;
+}
+
+.modal-overlay.v-enter, .modal-overlay.v-leave-to {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+}
+
+.modal.v-enter, .modal.v-leave-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
 </style>

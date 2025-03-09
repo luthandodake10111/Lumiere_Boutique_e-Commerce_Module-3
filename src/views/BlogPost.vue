@@ -17,26 +17,7 @@
     data() {
       return {
         post: null,
-        allPosts: [
-          {
-            id: 1,
-            title: "The Art of Styling Silk Scarves",
-            content: "Detailed content about styling scarves...",
-            image: "https://via.placeholder.com/600",
-          },
-          {
-            id: 2,
-            title: "Why Silk is the Ultimate Luxury Fabric",
-            content: "Silk has many benefits...",
-            image: "https://via.placeholder.com/600",
-          },
-          {
-            id: 3,
-            title: "5 Must-Have Accessories for 2025",
-            content: "Accessories can transform your look...",
-            image: "https://via.placeholder.com/600",
-          },
-        ],
+        allPosts: [],
       };
     },
     created() {

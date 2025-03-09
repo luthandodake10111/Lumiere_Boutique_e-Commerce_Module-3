@@ -1,229 +1,80 @@
 <template>
-    <div>
-      <div class="register-container">
+  <div>
+    <div class="register-container">
       <div class="register-form">
-      <h2>Create Account</h2>
-      <form @submit.prevent="register">
-        <input v-model="first_name" placeholder="First Name" required />
-        <br />
-        <input v-model="last_name" placeholder="Last Name" required />
-        <br />
-        <input v-model="email" type="email" placeholder="Email" required />
-        <br />
-        <input v-model="password" type="password" placeholder="Password" required />
-        <br />
-        <input v-model="phone_number" type="number" placeholder="Phone Number" required />
-        <br />
-        <input v-model="address" type="address" placeholder="Address" required />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    </div>
-  
-    <div>
-      <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Contact Us</h3>
-        <p><b>Email:</b> contact@lumiereboutique.org.za</p>
-        <p><b>Phone:</b> +27 123 4567</p>
-        <p><b>Address:</b> 123 Fashion St, Cape Town, South Africa</p>
-      </div>
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="/about">About</router-link></li>
-          <li><router-link to="/ProductPage">Products</router-link></li>
-          <li><router-link to="/contact">Contact</router-link></li>
-          <li><router-link to="/Login">Login</router-link></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Follow Us</h3>
-        <div class="social-media">
-          <a href="https://facebook.com" target="_blank" class="social-icon">Facebook</a>
-          <a href="https://instagram.com" target="_blank" class="social-icon">Instagram</a>
-          <a href="https://twitter.com" target="_blank" class="social-icon">Twitter</a>
-          <a href="https://www.tiktok.com" target="_blank" class="social-icon">TikTok</a>
-        </div>
-      </div>
-      <div class="bg-dark text-white text-center py-3 fixed-bottom">
-        <p>&copy; 2025 Lumiere Boutique. All Rights Reserved.</p>
+        <h2>Create Account</h2>
+        <form @submit.prevent="register">
+          <input v-model="userData.first_name" placeholder="First Name" required />
+          <input v-model="userData.last_name" placeholder="Last Name" required />
+          <input v-model="userData.email" type="email" placeholder="Email" required />
+          <input v-model="userData.password" type="password" placeholder="Password" required />
+          <input v-model="userData.phone_number" type="tel" placeholder="Phone Number" required />
+          <button type="submit">Register</button>
+        </form>
       </div>
     </div>
-  </footer>
+
+    <!-- Error Modal -->
+    <div v-if="modalVisible" class="modal-overlay">
+      <div class="modal">
+        <h2>Registration Failed</h2>
+        <p>{{ errorMessage }}</p>
+        <button @click="closeModal" class="close-modal">Close</button>
+      </div>
     </div>
-    </div>
-  
+  </div>
 </template>
 
 <script>
-
 import { mapActions } from 'vuex';
 
 export default {
-    data() {
-        return { first_name: '', last_name: '', email: '', password: '', phone_number: '', address: '', message: '' };
-    },
-    methods: {
-    
+  data() {
+    return {
+      userData: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        phone_number: ''
+      },
+      modalVisible: false,  // Controls the modal visibility
+      errorMessage: '',     // Holds the error message
+    };
+  },
+  methods: {
     ...mapActions(['register']),
     async register() {
-  const userData = {
-    first_name: this.first_name,
-    last_name: this.last_name,
-    email: this.email,
-    password: this.password,
-    phone_number: this.phone_number,
-    address: this.address
-  };
-  await this.$store.dispatch('register', userData);
-  this.$router.push('/login')
-}
+      try {
+        await this.$store.dispatch('register', this.userData);
+        this.$router.push('/login');
+      } catch (error) {
+        console.error("Registration failed:", error);
+        this.errorMessage = "Registration failed. Please try again."; // Set error message
+        this.modalVisible = true;  // Show the modal
+      }
+    },
+    closeModal() {
+      this.modalVisible = false;  // Close the modal when the button is clicked
+    }
   }
-  }
-
+};
 </script>
-
 
 <style scoped>
 * {
-  font-family: "Lato", "Montserrat", "Playfair Display", "Merriweather";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto';
   text-align: center;
-  color: #2c3e50;
 }
-
-/* Navbar Base Styling */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px;
-  background-color: #333333;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  color: #d4af37;
-  height: 155px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  width: 150px;
-  height: auto;
-  margin-right: 10px;
-  border-radius: 95%;
-  transition: transform 0.5s ease;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  position: relative;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  padding: 25px 15px;
-  transition: color 0.3s ease;
-}
-
-/* Navbar Hover & Active Page Effect */
-.nav a:hover,
-.nav a.active {
-  color: gold !important;
-}
-
-/* Dropdown Styling */
-.dropdown {
-  position: relative;
-}
-
-/* Hidden Dropdown Menu */
-.dropdown-menu {
-  position: absolute;
-  background: #fff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 0.5rem 0;
-  top: 100%;
-  left: 0;
-  min-width: 150px;
-
-  /* Hidden by default */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Dropdown Menu Links */
-.dropdown-menu li {
-  padding: 10px 15px;
-  white-space: nowrap;
-}
-
-.dropdown-menu a {
-  color: #333;
-  display: block;
-  padding: 10px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* Hover Effect for Dropdown Links */
-.dropdown-menu a:hover {
-  background: gold;
-  color: white;
-}
-
-.hero {
-  text-align: center;
-  padding: 5rem 2rem;
-  background: linear-gradient(to right, #f8f9fa, #e0e0e0);
-  color: #003366;
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  background-color: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: white;
-}
-
-.btn:hover {
-  background-color: #d4af37;
-}
-
-/* Register Page Full Height and Styling */
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0; /* Light background for contrast */
+  background-color: whitesmoke;
 }
-
 .register-form {
-  background-color: #ffffff;
+  background-color: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -231,25 +82,21 @@ nav {
   max-width: 400px;
   width: 100%;
 }
-
-h2 {
-  color: #003366;
-  margin-bottom: 1.5rem;
-}
-
 input {
   width: 100%;
   padding: 0.8rem;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
 }
-
+h2 {
+  color: black;
+  margin-bottom: 1.5rem;
+}
 button {
   width: 100%;
   padding: 0.8rem;
-  background-color: #003366;
+  background-color: black;
   border: none;
   border-radius: 4px;
   color: white;
@@ -257,104 +104,47 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 button:hover {
-  background-color: #d4af37; /* Gold hover effect */
+  background-color: #d4af37;
 }
 
-
-.card {
-  background: gold !important;
-  padding: 1.5rem;
-  margin: 2rem auto;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  max-width: 1200px;
-}
-
-.feature {
-  text-decoration: none;
-  color: inherit;
-  padding: 1.5rem;
-  background: #fff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.feature:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.feature h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.feature p {
-  font-size: 1rem;
-  color: #777;
-}
-
-/* Footer Styles */
-.footer {
-  background-color: #333333;
-  color: white;
-}
-
-.footer-content {
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
 }
 
-.footer-section {
-  flex: 1;
-}
-
-.footer h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #d4af37;
-}
-
-.footer p,
-.footer a {
-  font-size: 14px;
-  color: #bbb;
-  line-height: 1.4;
-}
-
-.footer a {
-  text-decoration: none;
-}
-
-.footer a:hover {
-  color: #d4af37;
-}
-
-.social-media {
-  display: flex;
-  gap: 12px;
-}
-
-.social-icon {
-  font-size: 16px;
-  color: #bbb;
-}
-
-.social-icon:hover {
-  color: #d4af37;
-}
-
-.footer-bottom {
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
   text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  color: #bbb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+}
+
+.close-modal {
+  background: #000;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.close-modal:hover {
+  background: #444;
 }
 </style>
