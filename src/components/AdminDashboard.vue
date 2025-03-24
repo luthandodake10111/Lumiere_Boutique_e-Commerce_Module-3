@@ -21,9 +21,9 @@
 
     <!-- Dashboard Content -->
     <div class="dashboard">
-      <h1>Welcome, {{ user?.first_name }} {{ user?.last_name }}</h1>
-      <p>Email: {{ user?.email }}</p>
-      <p>Role: {{ user?.role }}</p>
+      <h1>Welcome, Matthew</h1>
+      <!-- <p>Email: {{ user?.email }}</p> -->
+      <p>Role: Purchasing Officer</p>
 
       <!-- PRODUCTS MANAGEMENT -->
       <section>
@@ -159,7 +159,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
   padding: 10px 20px;
   height: 75px;
   position: fixed;

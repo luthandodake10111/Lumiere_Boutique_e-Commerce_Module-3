@@ -1,103 +1,114 @@
 <template>
-    <div class="contact-us">
-      <h2>Contact Us</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="name">Your Name:</label>
-          <input type="text" id="name" v-model="formData.name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Your Email:</label>
-          <input type="email" id="email" v-model="formData.email" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Your Message:</label>
-          <textarea id="message" v-model="formData.message" required></textarea>
-        </div>
-        <button type="submit">Submit</button>
+  <div class="contact-page">
+    <!-- Navbar for navigation -->
+    <nav>
+      <router-link to="/" class="navbar-link">Home</router-link>
+      <router-link to="/AboutPage" class="navbar-link">About Us</router-link>
+      <router-link to="/contact-us" class="navbar-link">Contact Us</router-link>
+    </nav>
+
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <form>
+        <!-- Form Fields -->
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <textarea placeholder="Your Message"></textarea>
+
+        <!-- Contact Button -->
+        <button class="btn">Send Message</button>
       </form>
-  
-      <!-- Modal Popup -->
-      <div v-if="showModal" class="modal-overlay">
-        <div class="modal-content">
-          <p>Your message has been sent successfully!</p>
-          <button @click="closeModal">Close</button>
-        </div>
-      </div>
     </div>
-  </template>
+  </div>
   
-  <script>
-  export default {
-    data() {
-      return {
-        formData: {
-          name: '',
-          email: '',
-          message: ''
-        },
-        showModal: false
-      };
-    },
-    methods: {
-      handleSubmit() {
-        // Here you would send the form data to your backend
-        console.log('Form data submitted:', this.formData);
-  
-        // Show the modal on successful submission
-        this.showModal = true;
-  
-        // Reset form after submission
-        this.formData.name = '';
-        this.formData.email = '';
-        this.formData.message = '';
-      },
-      closeModal() {
-        this.showModal = false;
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .contact-us {
-    padding: 20px;
-  }
-  .form-group {
-    margin-bottom: 10px;
-  }
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
-  button {
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Modal Styles */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-  }
-  </style>
-  
+</template>
+
+<script>
+export default {
+  // Add any necessary script logic here
+};
+</script>
+
+<style scoped>
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the screen */
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.navbar-link:hover {
+  background-color: #D4AF37;
+  color: white;
+}
+
+.contact-container {
+  padding: 20px;
+  background-color: #f5f5f5; /* Light grey background */
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+button.btn {
+  background-color: black;
+  color: whitesmoke;
+  padding: 10px 50px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  align-self: center;
+  margin-top: 20px;
+}
+
+button.btn:hover {
+  background-color: #D4AF37;
+}
+</style>

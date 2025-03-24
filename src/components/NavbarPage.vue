@@ -47,9 +47,9 @@
 
       <!-- Dropdown for Products -->
     <li><router-link to="/ProductPage">Products</router-link></li>
-      <li><router-link to="/NewArrivals">New Arrivals</router-link></li>
+      <!-- <li><router-link to="/NewArrivals">New Arrivals</router-link></li> -->
       <li><router-link to="/Blog">Blog</router-link></li>
-      <li><router-link to="/contact">Contact</router-link></li>
+      <li><router-link to="/contact-us">Contact</router-link></li>
       <li><router-link to="/login">Login</router-link></li>
     </ul>
   </div>

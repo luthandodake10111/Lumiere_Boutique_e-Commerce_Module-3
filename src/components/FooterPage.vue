@@ -17,7 +17,7 @@
       <div class="footer-section">
         <h3>Customer Services</h3>
         <ul>
-          <li><router-link to="/ContactUs">Contact Us</router-link></li>
+          <li><router-link to="/contact-us">Contact Us</router-link></li>
           <li><router-link to="/faqs">FAQs</router-link></li>
         </ul>
       </div>

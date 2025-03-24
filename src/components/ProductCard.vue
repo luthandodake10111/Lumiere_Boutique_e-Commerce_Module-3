@@ -2,16 +2,20 @@
   <!-- Product Cards -->
   <div class="product-page">
     <div class="product-list">
-      <div 
-        v-for="product in products" 
-        :key="product.id" 
-        class="product-card"
-        @click="goToProductDetail(product.product_id)"
-      >
-        <div class="product-image" :style="{ backgroundImage: 'url(' + product.image_url + ')' }">
-          <div class="product-info">
-            <p class="product-name">{{ product.product_name }}</p>
-            <p class="product-price">R {{ product.price }}</p>
+      <!-- Check if products are available -->
+      <div v-if="products.length === 0">Loading products...</div>
+      <div v-else>
+        <div 
+          v-for="product in products" 
+          :key="product.product_id" 
+          class="product-card"
+          @click="goToProductDetail(product.product_id)"
+        >
+          <div class="product-image" :style="{ backgroundImage: 'url(' + product.image_url + ')' }">
+            <div class="product-info">
+              <p class="product-name">{{ product.product_name }}</p>
+              <p class="product-price">R {{ product.price }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -20,21 +24,25 @@
 </template>
 
 <script>
-
-
 export default {
-  
-  computed:{
-    products(){
-      return this.$store.state.products
+  computed: {
+    products() {
+      return this.$store.state.products;
     }
   },
-  
+
   methods: {
     goToProductDetail(productId) {
-      console.log(productId);
+      console.log(productId); // Log product ID for debugging
       
       this.$router.push({ name: 'productDetail', params: { id: productId } });
+    }
+  },
+
+  mounted() {
+    // Fetch products if not already available
+    if (this.products.length === 0) {
+      this.$store.dispatch('fetchProducts');
     }
   }
 };
