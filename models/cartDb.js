@@ -1,6 +1,6 @@
-<<<<<<< HEAD:models/cartDb.js
 import { pool } from '../config/config.js';
 
+// User Authentication Functions
 const getUserByEmail = async (email) => {
     const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     return rows.length > 0 ? rows[0] : null;
@@ -19,63 +19,48 @@ const getCartHistory = async (user_id) => {
     return rows;
 };
 
-export { getUserByEmail, registerUser, getCartHistory };
-=======
-import {pool} from '../config/config.js'
+// Cart Management Functions
+const getCart = async (user_id) => {
+    const [cart] = await pool.query('SELECT * FROM cart WHERE user_id = ?', [user_id]);
+    return cart;
+};
 
-const getCart = async(user_id, callback)=> {
-    const [cart] = await pool.query('SELECT * FROM cart WHERE user_id = ?',[user_id], (err, rows)=>{
-        if(err) return callback(err);
-        callback(null, rows)
-    })
-    return cart
-    
-}
-
-const insertCartItem = async(user_id,product_id,quantity,added_at, callback)=>{
-    await pool.query(
-        'INSERT INTO cart (user_id, product_id, quantity, added_at) VALUES (?, ?, ?, ?) ONDUPLICATE KEY UPDATE quantity = quantity + ?' , 
-        [user_id, product_id, quantity,quantity, added_at], (err, result)=>{
-            if (err) return callback(err)
-                callback(null, result)
-        }
+const insertCartItem = async (user_id, product_id, quantity, added_at) => {
+    const [result] = await pool.query(
+        `INSERT INTO cart (user_id, product_id, quantity, added_at) 
+        VALUES (?, ?, ?, ?) 
+        ON DUPLICATE KEY UPDATE quantity = quantity + ?`,
+        [user_id, product_id, quantity, added_at, quantity]
     );
-    
-    return {cart:user_id,product_id,quantity,added_at}
+    return result.insertId;
+};
 
-}
-
-const updateCartItem = async(user_id,product_id,quantity,callback)=>{
-    await pool.query(
-        'UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?', 
-        [quantity, user_id, product_id], (err, result)=>{
-            if(err) return callback(err);
-            callback(null, result)
-        }
+const updateCartItem = async (user_id, product_id, quantity) => {
+    const [result] = await pool.query(
+        'UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?',
+        [quantity, user_id, product_id]
     );
-    
-    return await updateCartItem()
-}
+    return result.affectedRows > 0;
+};
 
-const removeCartItem = async(user_id,product_id, callback)=>{
-    const result = await pool.query('DELETE FROM cart WHERE user_id = ? AND product_id = ?',[user_id,product_id], (err, result)=>{
-        if(err) return callback(err);
-        callback(null, result)
-    });
-    
+const removeCartItem = async (user_id, product_id) => {
+    const [result] = await pool.query('DELETE FROM cart WHERE user_id = ? AND product_id = ?', [user_id, product_id]);
     return result.affectedRows > 0 ? "Item removed successfully" : "Item not found";
 };
 
-const clearCart = async(user_id, callback)=>{
-    await pool.query('DELETE FROM cart WHERE user_id = ?',[user_id], (err,result)=>{
-        if(err) return callback(err);
-        callback(null, result)
-    })
-}
+const clearCart = async (user_id) => {
+    const [result] = await pool.query('DELETE FROM cart WHERE user_id = ?', [user_id]);
+    return result.affectedRows > 0 ? "Cart cleared successfully" : "Cart already empty";
+};
 
-
-
-
-
-export {getCart,insertCartItem,updateCartItem,removeCartItem, clearCart}
->>>>>>> 5d63e8f2391f802870ce027af9febb86e5ffb225:model/cartDb.js
+// Export functions
+export { 
+    getUserByEmail, 
+    registerUser, 
+    getCartHistory, 
+    getCart, 
+    insertCartItem, 
+    updateCartItem, 
+    removeCartItem, 
+    clearCart 
+};

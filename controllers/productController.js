@@ -1,4 +1,9 @@
-import { getProducts, singleProducts, addProduct, updateProduct, deleteProduct } from "../models/productModel.js";
+import { getProducts, 
+        singleProduct, 
+        addProduct, 
+        updateProduct, 
+        deleteProduct } from "../models/productModel.js";
+
 
 const getProductsCon = async (req, res) => {
     try {
@@ -9,10 +14,10 @@ const getProductsCon = async (req, res) => {
     }
 };
 
-const singleProductsCon = async (req, res) => {
+const singleProductCon = async (req, res) => { 
     try {
         const productId = req.params.id;
-        const product = await singleProducts(productId);
+        const product = await singleProduct(productId); 
 
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
@@ -23,6 +28,7 @@ const singleProductsCon = async (req, res) => {
         res.status(500).json({ message: "Error fetching product", error });
     }
 };
+
 
 const addProductCon = async (req, res) => {
     try {
@@ -65,4 +71,8 @@ const deleteProductCon = async (req, res) => {
     }
 };
 
-export { getProductsCon, singleProductsCon, addProductCon, updateProductCon, deleteProductCon };
+export { getProductsCon, 
+         singleProductCon, 
+         addProductCon, 
+         updateProductCon, 
+         deleteProductCon };
